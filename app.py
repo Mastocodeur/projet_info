@@ -10,21 +10,32 @@ import io
 
 MONGO_USERNAME = os.getenv("MONGO_USERNAME")
 MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
-MONGO_URI = f"mongodb+srv://{MONGO_USERNAME}:{MONGO_PASSWORD}@instalitre.3cjul.mongodb.net/"
+MONGO_URI = f"mongodb+srv://loqmenanani:LHiBK757spzhBrWM@instalitre.3cjul.mongodb.net/"
 client = MongoClient(MONGO_URI)
 
 
-client = MongoClient(MONGO_URI)
+# Send a ping to confirm a successful connection
+# try:
+#     client.admin.command('ping')
+#     print("Pinged your deployment. You successfully connected to MongoDB!")
+# except Exception as e:
+#     print(e)
+
 db = client["instalitre"]  # Nom de la base de données
 users_col = db["users"]  # Collection pour les utilisateurs
 posts_col = db["posts"]  # Collection pour les publications
 
-# try:
-#     client.server_info()  # Vérifie la connexion
-#     print("Connexion réussie ✅")
-#
-# except Exception as e:
-#     print("Erreur de connexion ❌:", e)
+# print usernames
+for user in users_col.find():
+    print(user["username"])
+
+
+try:
+    client.server_info()  # Vérifie la connexion
+    print("Connexion réussie ✅")
+
+except Exception as e:
+    print("Erreur de connexion ❌  ", e)
 
 
 # Contexte de hachage pour les mots de passe
